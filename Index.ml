@@ -40,11 +40,9 @@ let documents index = StringMap.fold (fun k v acc -> acc + 1) index 0
 (* Adds all given tuples (word, frequency) to BOW - StringMap with words as keys and global frequencies as values *)
 let add_words_to_bow words bow =
     let add bow (word, freq) =
-        let new_bow = StringMap.mapi (fun k v -> if k=word then v+freq else v) bow
-        in
-            if new_bow = bow
-            then StringMap.add word freq bow
-            else new_bow
+        if StringMap.mem word bow
+        then StringMap.add word ((StringMap.find word bow) + freq) (StringMap.remove word bow)
+        else StringMap.add word freq bow
     in
     List.fold_left add bow words
 
@@ -111,13 +109,21 @@ let more_like_this doc index =
 
 let term_vector doc index = StringMap.find doc index;;
 
-(*
-    Schemat:
-     1. index_directory
-     2. create_bow_from_index
-     3. windex = weight_index
-     4. more_like_this doc
-*)
+(* Saves index to given file *)
+let save_to_file index file =
+    let out_channel = open_out_bin file
+    in begin
+        Marshal.to_channel out_channel index [];
+        close_out out_channel
+    end;;
 
-(* --- *)
+(* Loads index from given file *)
+let load_from_file file =
+    let in_channel = open_in_bin file
+    and result = ref (StringMap.empty)
+    in begin
+        result := Marshal.from_channel in_channel;
+        close_in in_channel;
+        (!result)
+    end;;
 

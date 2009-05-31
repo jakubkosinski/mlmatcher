@@ -38,3 +38,9 @@ val more_like_this : string -> tvector t -> (string * float) list
 (* Returns term vector for given file *)
 val term_vector : string -> tvector t -> tvector
 
+(* Saves calculated index to file *)
+val save_to_file : tvector t -> string -> unit
+
+(* Loads index from given file *)
+val load_from_file : string -> tvector t
+

@@ -1,2 +1,4 @@
 *.cmo
 *.cmi
+data/*
+data
