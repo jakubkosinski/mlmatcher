@@ -7,6 +7,16 @@ type fvector = (String.t * int) list
 type tvector = (String.t * float) list
 type 'a t = 'a StringMap.t
 
+(* Creates empty index *)
+let create = StringMap.empty;;
+
+(* Removes duplicates from given list. Result is not sorted *)
+let unique lst =
+    let tbl = Hashtbl.create (List.length lst)
+    in
+        List.iter (fun i -> Hashtbl.replace tbl i ()) lst;
+        Hashtbl.fold (fun key data accu -> key :: accu) tbl []
+
 (* Converts list of words to list of tuples (word, frequency) *)
 let compact array =
     let rec add_word word array =
@@ -36,15 +46,6 @@ let index_document doc index = StringMap.add doc (compact (document_to_word_list
 
 (* Returns number of indexed documents in given index *)
 let documents index = StringMap.fold (fun k v acc -> acc + 1) index 0
-
-(* Adds all given tuples (word, frequency) to BOW - StringMap with words as keys and global frequencies as values *)
-let add_words_to_bow words bow =
-    let add bow (word, freq) =
-        if StringMap.mem word bow
-        then StringMap.add word ((StringMap.find word bow) + freq) (StringMap.remove word bow)
-        else StringMap.add word freq bow
-    in
-    List.fold_left add bow words
 
 (* Calculates similarities for given document vectors *)
 let similarity doc1 doc2 =
@@ -91,11 +92,24 @@ let index_directory dir =
         | x::xs -> process_files xs (index_document x index)
     in process_files (glob dir) StringMap.empty
 
+(* Returns list of token from given vector *)
+let tokens_from_tvector tvector =
+    unique (List.map (fun pair -> fst pair) tvector)
+
+(* Adds all given tuples (word, frequency) to BOW - StringMap with words as keys and # of documents with given term as values *)
+let add_words_to_bow words bow =
+    let add bow word =
+        if StringMap.mem word bow
+        then StringMap.add word ((StringMap.find word bow) + 1) (StringMap.remove word bow)
+        else StringMap.add word 1 bow
+    in
+    List.fold_left add bow words
+
 (* Creates BOW from index *)
-let create_bow_from_index index = StringMap.fold (fun k v acc -> (add_words_to_bow v acc)) index StringMap.empty
+let create_bow_from_index index = StringMap.fold (fun k v acc -> (add_words_to_bow (tokens_from_tvector v) acc)) index StringMap.empty
 
 (* Indexes files in given directory, returns weighted index *)
-let windex_directory dir =
+let from_directory dir =
     let index = index_directory dir
     in weight_index index (create_bow_from_index index);;
 
