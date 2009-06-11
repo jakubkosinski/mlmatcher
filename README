@@ -1,1 +1,9 @@
 Document matcher in oCaml.
+
+Uses vector model with tf-idf wages.
+
+To compile run
+$ rake
+and then
+$ ./Matcher
+
