@@ -323,7 +323,7 @@ int stem(char * p, int i, int j)
 #include <caml/mlvalues.h>
 #include <caml/memory.h>
 
-CAMLprim value wrap_stem(value ml_str)
+CAMLprim value porter(value ml_str)
 {
     CAMLparam1(ml_str);
     CAMLlocal1(out);

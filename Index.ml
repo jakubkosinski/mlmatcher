@@ -1,3 +1,4 @@
+open Stemmer
 module StringMap = Map.Make(String)
 
 exception DocumentNotFound of string
@@ -31,7 +32,7 @@ let compact array =
         | x::xs -> process xs (add_word x result)
     in process array []
 
-(* Creates list of words from given document *)
+(* Creates list of word stems from given document *)
 let document_to_word_list path =
     let rec file = open_in path
     and process file result =
@@ -39,7 +40,7 @@ let document_to_word_list path =
             process file ((Str.split (Str.regexp "[ \n\t\r]+") (Str.global_substitute (Str.regexp "[^ \n\t\ra-zA-Z0-9_]") (fun s -> "") (input_line file)))::result)
         with
         | e -> ((close_in file), (List.map (fun s -> String.lowercase s) (List.rev (List.flatten (List.map (fun l -> List.rev l) result)))))
-    in snd (process file [])
+    in List.map (fun word -> stem word) (snd (process file []))
 
 (* Adds given document to given index represented by StringMap *)
 let index_document doc index = StringMap.add doc (compact (document_to_word_list doc)) index
