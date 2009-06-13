@@ -1,6 +1,9 @@
+*.cma
 *.cmo
 *.cmx
 *.o
+*.a
 *.cmi
 data/*
 data
+*.dat
