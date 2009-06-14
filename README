@@ -8,5 +8,7 @@ $ rake
 Run with
 $ ./Matcher
 
+Documentation available on http://ghandal.github.com/mlmatcher
+
 Released under MIT License.
 
