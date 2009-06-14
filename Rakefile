@@ -40,7 +40,3 @@ task :doc do
   sh "ocamldoc -html -d doc -t MLMatcher #{files.join(" ")}"
 end
 
-desc "Run tests"
-task :test do
-end
-
