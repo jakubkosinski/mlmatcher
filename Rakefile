@@ -33,6 +33,13 @@ task :clean do
   end
 end
 
+desc "Generate documentation using ocamldoc"
+task :doc do
+  files = ["Index.mli","Stemmer.mli"]
+  sh "mkdir doc"
+  sh "ocamldoc -html -d doc -t MLMatcher #{files.join(" ")}"
+end
+
 desc "Run tests"
 task :test do
 end
