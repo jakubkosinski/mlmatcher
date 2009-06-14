@@ -1,0 +1,88 @@
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index" rel="Chapter" href="Index.html">
+<link title="Stemmer" rel="Chapter" href="Stemmer.html"><title>MLMatcher : Index of values</title>
+</head>
+<body>
+<center><h1>Index of values</h1></center>
+<table>
+<tr><td align="left"><br>C</td></tr>
+<tr><td><a href="Index.html#VALcreate">create</a> [<a href="Index.html">Index</a>]</td>
+<td><div class="info">
+<code class="code">Index.create</code> creates a new, empty index.
+</div>
+</td></tr>
+<tr><td align="left"><br>D</td></tr>
+<tr><td><a href="Index.html#VALdocuments">documents</a> [<a href="Index.html">Index</a>]</td>
+<td><div class="info">
+<code class="code">Index.documents i</code> returns the number of indexed documents
+   in <code class="code">i</code>.
+</div>
+</td></tr>
+<tr><td><a href="Index.html#VALdocuments_similarity">documents_similarity</a> [<a href="Index.html">Index</a>]</td>
+<td><div class="info">
+<code class="code">Index.documents_similarity doc1 doc2 index</code> calculates similarities
+   between documents <code class="code">doc1</code> and <code class="code">doc2</code> using index <code class="code">index</code>.
+</div>
+</td></tr>
+<tr><td align="left"><br>F</td></tr>
+<tr><td><a href="Index.html#VALfrom_directory">from_directory</a> [<a href="Index.html">Index</a>]</td>
+<td><div class="info">
+<code class="code">Index.from_directory dir</code> creates index from all files from
+   <code class="code">dir</code>, including all files in <code class="code">dir</code> subdirectories.
+</div>
+</td></tr>
+<tr><td align="left"><br>I</td></tr>
+<tr><td><a href="Index.html#VALindexed_documents">indexed_documents</a> [<a href="Index.html">Index</a>]</td>
+<td><div class="info">
+<code class="code">Index.indexed_documents i</code> returns list of all documents
+   indexed in <code class="code">i</code>.
+</div>
+</td></tr>
+<tr><td align="left"><br>L</td></tr>
+<tr><td><a href="Index.html#VALload_from_file">load_from_file</a> [<a href="Index.html">Index</a>]</td>
+<td><div class="info">
+<code class="code">Index.load_from_file file</code> returns index loaded from file named <code class="code">name</code>.
+</div>
+</td></tr>
+<tr><td align="left"><br>M</td></tr>
+<tr><td><a href="Index.html#VALmore_like_this">more_like_this</a> [<a href="Index.html">Index</a>]</td>
+<td><div class="info">
+<code class="code">Index.more_like_this doc i</code> returns list of tuples (document, similarity)
+   for document <code class="code">doc</code> and index with term vectors (<a href="Index.html#TYPEtvector"><code class="code">Index.tvector</code></a>) <code class="code">i</code> sorted
+   descending by similarity to <code class="code">doc</code>.
+</div>
+</td></tr>
+<tr><td align="left"><br>S</td></tr>
+<tr><td><a href="Index.html#VALsave_to_file">save_to_file</a> [<a href="Index.html">Index</a>]</td>
+<td><div class="info">
+<code class="code">Index.save_to_file i name</code> saves index <code class="code">i</code> to file named <code class="code">name</code>.
+</div>
+</td></tr>
+<tr><td><a href="Index.html#VALsimilarity">similarity</a> [<a href="Index.html">Index</a>]</td>
+<td><div class="info">
+<code class="code">Index.similarity v1 v2</code> calculates similarity between
+   term vectors <code class="code">v1</code> and <code class="code">v2</code>.
+</div>
+</td></tr>
+<tr><td><a href="Stemmer.html#VALstem">stem</a> [<a href="Stemmer.html">Stemmer</a>]</td>
+<td><div class="info">
+<code class="code">Stemmer.stem s</code> returns stem for <code class="code">s</code>.
+</div>
+</td></tr>
+<tr><td align="left"><br>T</td></tr>
+<tr><td><a href="Index.html#VALterm_vector">term_vector</a> [<a href="Index.html">Index</a>]</td>
+<td><div class="info">
+<code class="code">Index.term_vector doc i</code> returns <a href="Index.html#TYPEtvector"><code class="code">Index.tvector</code></a> for <code class="code">doc</code> from <a href="Index.html#TYPEtvector"><code class="code">Index.tvector</code></a>
+   index <code class="code">i</code>.
+</div>
+</td></tr>
+</table><br>
+</body>
+</html>
